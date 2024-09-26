@@ -79,9 +79,23 @@ module.exports = function (connection) {
     });
   });
 
-  router.get("/:id", (req, res) => {
-    let { id } = req.params;
-    let sql = `SELECT * FROM players WHERE id=${id}`;
+  // router.get("/:id", (req, res) => {
+  //   let { id } = req.params;
+  //   let sql = `SELECT * FROM players WHERE id=${id}`;
+
+  //   connection.query(sql, (err, result) => {
+  //     if (err) {
+  //       console.error("資料讀取失敗:", err);
+  //     } else {
+  //       console.log("成功讀取資料: ", result);
+  //       res.json(result);
+  //     }
+  //   });
+  // });
+
+  router.get("/team15", (req, res) => {
+    let sql =
+      "SELECT team_name, COUNT(*) AS player_count FROM players GROUP BY team_name HAVING COUNT(*) <= 15;";
 
     connection.query(sql, (err, result) => {
       if (err) {
