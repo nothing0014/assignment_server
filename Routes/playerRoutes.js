@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 
-module.exports = function (connection) {
+export default function (connection) {
   const router = express.Router();
 
   // Routes
@@ -32,8 +32,8 @@ module.exports = function (connection) {
     values.push(numPerPage);
     values.push((page - 1) * numPerPage);
 
-    console.log(sql);
-    console.log(values);
+    // console.log(sql);
+    // console.log(values);
 
     connection.query(sql, values, (err, result) => {
       if (err) {
@@ -66,8 +66,8 @@ module.exports = function (connection) {
     if (teamName) values.push(`${teamName}`);
     if (playerName) values.push(`%${playerName}%`); // 使用 % 來進行部分匹配
 
-    console.log(sql);
-    console.log(values);
+    // console.log(sql);
+    // console.log(values);
 
     connection.query(sql, values, (err, result) => {
       if (err) {
@@ -108,4 +108,4 @@ module.exports = function (connection) {
   });
 
   return router;
-};
+}
